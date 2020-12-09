@@ -6,7 +6,7 @@ public class IOReader {
 
     private static volatile IOReader ioReader;
     private String path;
-    private StringBuilder list;
+    private StringBuilder list = new StringBuilder();
     private FileReader fileReader;
     private BufferedReader bufferedReader;
     private IOReader(String path){
