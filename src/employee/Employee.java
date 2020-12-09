@@ -5,11 +5,12 @@ public class Employee {
     private int id;
     private String name;
     private String position;
-    private int dayInWork = 0;
-    public Employee(int id, String name, String position){
+    private int dayInWork;
+    public Employee(int id, String name, String position,int dayInWork){
         this.id = id;
         this.name = name;
         this.position = position;
+        this.dayInWork = dayInWork;
     }
 
     public int getId() {
