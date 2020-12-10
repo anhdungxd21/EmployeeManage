@@ -14,11 +14,11 @@ public class PrintOut {
         employeeTable();
         //System.out.printf("%-10d%-10s%-10s%-10d");
         System.out.println("1.Them nhan vien");
-        System.out.println("2.sua");
-        System.out.println("3.xoa");
+        System.out.println("2.Sua thong tin");
+        System.out.println("3.Xoa nha vien");
+        System.out.println("4.Thoat");
         System.out.println("0.Exit");
     }
-
     public static void employeeTable(){
         if(arrayList == null) {
             IOReader ioReader = IOReader.getInstance();
