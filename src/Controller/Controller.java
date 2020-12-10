@@ -135,6 +135,7 @@ public class Controller {
                 break;
             case "3":
                 removeMenu();
+                saveFile();
                 break;
             case "0":
                 System.exit(0);
