@@ -2,6 +2,7 @@ Nguyen Xuan Chien,Nhan Vien,12
 Luong Anh Tu,Nhan Vien,12
 Nguyen Huy Hoang,Nhan Vien,12
 Le Doan Tung,Nhan vien,12
-Le Anh Dung,Giam Doc,1
+Le Anh Dung,don rac,0
 Nguyen Van Thao,Nhan Vien,12
 Nguyen Trung Nghia,Nhan Vien,12
+hoang anha,De tu anh,0

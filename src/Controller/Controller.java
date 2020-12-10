@@ -88,12 +88,21 @@ public class Controller {
         PrintOut.employeeTable();
         Matcher matcher;
         String choice;
+        ArrayList<Employee> employees = PrintOut.getArrayList();
         do{
             System.out.print("Chon so thu tu nhan vien de xoa: ");
             choice = scanner.nextLine();
+            if(choice.length()<1){
+                PrintOut.clearScreen();
+                mainMenu();
+            }
             matcher = pattern.matcher(choice);
         }while (!matcher.matches());
-        PrintOut.removeEmployee(Integer.parseInt(choice) - 1);
+        try{
+            PrintOut.removeEmployee(Integer.parseInt(choice) - 1);
+        }catch (IndexOutOfBoundsException e){
+            removeMenu();
+        }
         PrintOut.clearScreen();
         mainMenu();
     }
