@@ -1,5 +1,8 @@
 package file.controller;
 
+import Controller.PrintOut;
+import employee.Employee;
+
 import java.io.*;
 
 public class IOWriter {
@@ -9,15 +12,14 @@ public class IOWriter {
     private FileWriter fileWriter;
     private BufferedWriter bufferedWriter;
 
-    private IOWriter(String path){
-        this.path = path;
+    private IOWriter(){
     }
 
-    public static IOWriter getInstance(String path) {
+    public static IOWriter getInstance() {
         if(ioWriter == null){
             synchronized (IOWriter.class){
                 if(ioWriter == null){
-                    ioWriter = new IOWriter(path);
+                    ioWriter = new IOWriter();
                 }
             }
         }
@@ -51,6 +53,31 @@ public class IOWriter {
                     e.printStackTrace();
                 }
 
+            }
+        }
+    }
+    public void writeObject(){
+        File file = new File(path);
+        try{
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            fileWriter = new FileWriter(file);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            for(Employee employee: PrintOut.getArrayList()){
+                bufferedWriter.append(employee.toString());
+                bufferedWriter.append("\n");
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if(bufferedWriter != null){
+                try {
+                    bufferedWriter.close();
+                    fileWriter.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -2,23 +2,13 @@ package employee;
 
 public class Employee {
     private  final String COMMA = ",";
-    private int id;
     private String name;
     private String position;
     private int dayInWork;
-    public Employee(int id, String name, String position,int dayInWork){
-        this.id = id;
+    public Employee(String name, String position,int dayInWork){
         this.name = name;
         this.position = position;
         this.dayInWork = dayInWork;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -47,6 +37,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return this.id + COMMA + this.name + COMMA + this.position + COMMA + this.dayInWork;
+        return this.name + COMMA + this.position + COMMA + this.dayInWork;
     }
 }

@@ -15,15 +15,15 @@ public class IOReader {
     private BufferedReader bufferedReader;
     private ArrayList<Employee> employees = new ArrayList<Employee>();
 
-    private IOReader(String path){
-        this.path = path;
+    private IOReader(){
+
     }
 
-    public static IOReader getInstance(String path) {
+    public static IOReader getInstance() {
         if(ioReader == null){
             synchronized (IOReader.class){
                 if(ioReader == null){
-                    ioReader = new IOReader(path);
+                    ioReader = new IOReader();
                 }
             }
         }
@@ -77,7 +77,7 @@ public class IOReader {
                 String[] lines;
                 while ((line = bufferedReader.readLine()) != null) {
                     lines = line.split(",");
-                    employees.add(new Employee(Integer.parseInt(lines[0]),lines[1],lines[2],Integer.parseInt(lines[3])));
+                    employees.add(new Employee(lines[0],lines[1],Integer.parseInt(lines[2])));
                 }
             }
         }catch (IOException e){
@@ -85,8 +85,8 @@ public class IOReader {
         }finally {
             if(bufferedReader != null){
                 try {
-                    bufferedReader.close();
                     fileReader.close();
+                    bufferedReader.close();
                 }catch (IOException e){
                     e.printStackTrace();
                 }
