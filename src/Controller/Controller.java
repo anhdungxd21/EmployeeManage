@@ -5,13 +5,12 @@ import file.controller.IOReader;
 import file.controller.IOWriter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controller {
-    public static HashMap<Integer, Employee> hashMap = new HashMap<Integer, Employee>();
+    private static Pattern pattern = Pattern.compile("[0-9]{1,}");
     private static Scanner scanner = new Scanner(System.in);
     /*
      * login logical
@@ -84,19 +83,40 @@ public class Controller {
 
     }
 
+    public static void removeMenu(){
+        PrintOut.clearScreen();
+        PrintOut.employeeTable();
+        Matcher matcher;
+        String choice;
+        do{
+            System.out.print("Chon so thu tu nhan vien de xoa: ");
+            choice = scanner.nextLine();
+            matcher = pattern.matcher(choice);
+        }while (!matcher.matches());
+        PrintOut.removeEmployee(Integer.parseInt(choice) - 1);
+        PrintOut.clearScreen();
+        mainMenu();
+    }
+
     public static int mainMenu(){
         PrintOut.mainMenu();
         String choice = scanner.nextLine();
         switch (choice){
             case "1":
+                Matcher matcher;
                 PrintOut.clearScreen();
                 System.out.print("Nhap ten nhan vien: ");
                 String name = scanner.nextLine();
                 System.out.print("Nhap chuc vu nhan vien: ");
                 String position = scanner.nextLine();
-                System.out.print("Nhap ngay cong: ");
-                int dayInWork = Integer.parseInt(scanner.nextLine());
-                PrintOut.addEmployee(name,position,dayInWork);
+                String dayInWork;
+                do{
+                    System.out.print("Nhap ngay cong: ");
+                    dayInWork = scanner.nextLine();
+                    matcher = pattern.matcher(dayInWork);
+                }while (!matcher.matches());
+
+                PrintOut.addEmployee(name,position,Integer.parseInt(dayInWork));
                 saveFile();
                 PrintOut.clearScreen();
                 mainMenu();
@@ -105,9 +125,7 @@ public class Controller {
                 editMenu();
                 break;
             case "3":
-                break;
-            case "4":
-                login();
+                removeMenu();
                 break;
             case "0":
                 System.exit(0);

@@ -15,7 +15,6 @@ public class PrintOut {
         System.out.println("1.Them nhan vien");
         System.out.println("2.Sua thong tin");
         System.out.println("3.Xoa nha vien");
-        System.out.println("4.Thoat");
         System.out.println("0.Exit");
     }
     public static void employeeTable(){
@@ -44,13 +43,19 @@ public class PrintOut {
     public static ArrayList<Employee> getArrayList() {
         return arrayList;
     }
+    public static void setArrayListToNull(){
+        arrayList = null;
+    }
 
     public static void addEmployee(String name, String position, int dayInWork){
         arrayList.add(new Employee(name, position, dayInWork));
     }
+    public static void removeEmployee(int index){
+        arrayList.remove(index);
+    }
 
     public static void clearScreen() {
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 40; i++) {
             System.out.println();
         }
     }
