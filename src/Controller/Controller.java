@@ -65,10 +65,18 @@ public class Controller {
                 System.out.print("Nhap ngay cong moi:");
                 dayInWork = scanner.nextLine();
                 matcher = pattern.matcher(dayInWork);
-            }while(!matcher.matches());
-            employees.get(choice-1).setName(name);
-            employees.get(choice-1).setPosition(position);
-            employees.get(choice-1).setDayInWork(Integer.parseInt(dayInWork));
+            }while(dayInWork.length()>0 && !matcher.matches());
+            if(name.length() > 0){
+                employees.get(choice-1).setName(name);
+            }
+            if(position.length()>0){
+                employees.get(choice-1).setPosition(position);
+            }
+            if(dayInWork.length() > 0){
+                employees.get(choice-1).setDayInWork(Integer.parseInt(dayInWork));
+            }
+            saveFile();
+            PrintOut.clearScreen();
             mainMenu();
         }catch (NumberFormatException e){
             editMenu();

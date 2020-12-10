@@ -12,7 +12,6 @@ public class PrintOut {
     }
     public static void mainMenu(){
         employeeTable();
-        //System.out.printf("%-10d%-10s%-10s%-10d");
         System.out.println("1.Them nhan vien");
         System.out.println("2.Sua thong tin");
         System.out.println("3.Xoa nha vien");
