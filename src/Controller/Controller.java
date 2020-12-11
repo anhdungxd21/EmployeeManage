@@ -42,10 +42,10 @@ public class Controller {
         ioWriter.writeObject();
     }
 
-    public static void saveFile(String path){
+    public static void saveFile(String path,ArrayList<Employee> arrayList){
         IOWriter ioWriter = IOWriter.getInstance();
         ioWriter.setPath("data/"+path);
-        ioWriter.writeObject();
+        ioWriter.writeObject(arrayList);
     }
 
     public static void editMenu(){
@@ -133,11 +133,42 @@ public class Controller {
             }
             PrintOut.clearScreen();
             PrintOut.employeeTable(employeesSubList);
+            saveSubTable(employeesSubList);
         }else{
             PrintOut.clearScreen();
             mainMenu();
         }
+    }
 
+    public static void saveSubTable(ArrayList<Employee> employees){
+        String choice;
+        Pattern check1 = Pattern.compile("[01]{1}");
+        Pattern checkNameFile = Pattern.compile("[a-zA-Z]{1,}[0-9]{0,}");
+        Matcher matcher;
+        Matcher matchNameFile;
+        do{
+            System.out.println("1.Luu bang moi ra file moi");
+            System.out.println("0.Exit");
+            choice = scanner.nextLine();
+            matcher = check1.matcher(choice);
+        }while (!matcher.matches());
+        switch (choice){
+            case "1":
+                String path;
+                do{
+                    System.out.print("Nhap ten file: ");
+                    path = scanner.nextLine();
+                    matchNameFile = checkNameFile.matcher(path);
+                }while (matchNameFile.matches());
+                if(path.length() > 0){
+                    saveFile(path,employees);
+                }
+                break;
+            case "0":
+                PrintOut.clearScreen();
+                mainMenu();
+                break;
+        }
 
     }
 

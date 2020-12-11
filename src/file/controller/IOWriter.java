@@ -4,6 +4,7 @@ import Controller.PrintOut;
 import employee.Employee;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class IOWriter {
     private static volatile IOWriter ioWriter;
@@ -65,6 +66,32 @@ public class IOWriter {
             fileWriter = new FileWriter(file);
             bufferedWriter = new BufferedWriter(fileWriter);
             for(Employee employee: PrintOut.getArrayList()){
+                bufferedWriter.append(employee.toString());
+                bufferedWriter.append("\n");
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if(bufferedWriter != null){
+                try {
+                    bufferedWriter.close();
+                    fileWriter.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void writeObject(ArrayList<Employee> arrayList){
+        File file = new File(path);
+        try{
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            fileWriter = new FileWriter(file);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            for(Employee employee: arrayList){
                 bufferedWriter.append(employee.toString());
                 bufferedWriter.append("\n");
             }
