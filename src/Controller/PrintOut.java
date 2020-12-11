@@ -8,17 +8,22 @@ import java.util.ArrayList;
 public class PrintOut {
     private static IOReader someReader = IOReader.getInstance("data/employee.txt");
     private static ArrayList<Employee> arrayList = someReader.readFile(1);
+    private static String[] fileList;
     public static void loginMenu(){
         System.out.println("Employee Manage version beta 0.5");
     }
     public static void mainMenu(){
         employeeTable();
-        System.out.println("1.Them nhan vien");
-        System.out.println("2.Sua thong tin");
-        System.out.println("3.Xoa nha vien");
-        System.out.println("4.Loc bang chuc vu");
-        System.out.println("5.Thay doi bang");
-        System.out.println("0.Exit");
+        System.out.println("1.Thêm nhân viên.");
+        System.out.println("2.Sửa thông tin nhân viên");
+        System.out.println("3.Xóa nhân viên.");
+        System.out.println("4.Lọc nhân viên bằng chức vụ.");
+        System.out.println("5.Thay đổi bảng làm việc.");
+        System.out.println("6.Tìm Kiếm Nhân Viên.");
+        System.out.println("0.Thoát trương trình.");
+    }
+    public static String[] getFileList(){
+        return fileList;
     }
     public static void coution(){
         System.out.println("Bo trong de thoat");
@@ -83,6 +88,10 @@ public class PrintOut {
     public static void printDirectoryFile(){
         IOReader ioReader = IOReader.getInstance();
         ioReader.setPath("data");
-        ioReader.printListFile();
+        StringBuilder stringBuilder = ioReader.printListFile();
+        fileList = stringBuilder.toString().split(",");
+        for(String path:fileList){
+            System.out.println(path);
+        }
     }
 }

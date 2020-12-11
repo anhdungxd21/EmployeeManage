@@ -78,13 +78,15 @@ public class IOReader {
         }
         return list;
     }
-    public void printListFile(){
+    public StringBuilder printListFile(){
         File file = new File(path);
+        StringBuilder stringBuilder = new StringBuilder();
         if(file.isDirectory()) {
             for (File file1 : file.listFiles()) {
-                System.out.println(file1);
+                stringBuilder.append(file1.toString().substring(5)+",");
             }
         }
+        return stringBuilder;
     }
 
     public ArrayList<Employee> readFile(int readObject1){

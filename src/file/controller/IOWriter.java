@@ -14,6 +14,7 @@ public class IOWriter {
     private BufferedWriter bufferedWriter;
 
     private IOWriter(){
+        this.path = "data/employee.txt";
     }
 
     public static IOWriter getInstance() {
