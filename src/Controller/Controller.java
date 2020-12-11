@@ -10,8 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controller {
-    private static Pattern pattern = Pattern.compile("[0-9]{1,}");
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Pattern pattern = Pattern.compile("[0-9]{1,}");
+    private static final Scanner scanner = new Scanner(System.in);
     /*
      * login logical
      */
@@ -143,7 +143,7 @@ public class Controller {
     public static void saveSubTable(ArrayList<Employee> employees){
         String choice;
         Pattern check1 = Pattern.compile("[01]{1}");
-        Pattern checkNameFile = Pattern.compile("[a-zA-Z]{1,}[0-9]{0,}");
+        Pattern checkNameFile = Pattern.compile("([a-zA-Z]{1,}[0-9]{0,})|([a-zA-Z]{1,}[0-9]{0,})[.][a-z0-9]{1,}");
         Matcher matcher;
         Matcher matchNameFile;
         do{
@@ -159,10 +159,12 @@ public class Controller {
                     System.out.print("Nhap ten file: ");
                     path = scanner.nextLine();
                     matchNameFile = checkNameFile.matcher(path);
-                }while (matchNameFile.matches());
+                }while (!matchNameFile.matches());
                 if(path.length() > 0){
                     saveFile(path,employees);
                 }
+                PrintOut.clearScreen();
+                mainMenu();
                 break;
             case "0":
                 PrintOut.clearScreen();
@@ -179,6 +181,7 @@ public class Controller {
             case "1":
                 Matcher matcher;
                 PrintOut.clearScreen();
+                PrintOut.employeeTable();
                 System.out.print("Nhap ten nhan vien: ");
                 String name = scanner.nextLine();
                 System.out.print("Nhap chuc vu nhan vien: ");

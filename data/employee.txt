@@ -1,10 +1,10 @@
 Nguyen Xuan Chien,Nhan Vien,12
 Luong Anh Tu,Lao cong,12
-Le Doan Tung,Nhan vien,12
-Le Anh Dung,Nhan vien,0
+Le Doan Tung,Nhan vien,11
 Nguyen Van Thao,Nhan Vien,12
 Nguyen Trung Nghia,Nhan Vien,12
 Nguyen Xuan Chien,Nhan vien,12
-asd,das,32
 Le Thi Chau,Giam Doc,12
 Nguyen Khac The,Truong Phong,12
+Dao Nhu Anh,Truong phong,12
+Nguyen The Anh,Nhan vien,12
