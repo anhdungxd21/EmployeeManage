@@ -6,7 +6,8 @@ import file.controller.IOReader;
 import java.util.ArrayList;
 
 public class PrintOut {
-    private static ArrayList<Employee> arrayList;
+    private static IOReader someReader = IOReader.getInstance("data/employee.txt");
+    private static ArrayList<Employee> arrayList = someReader.readFile(1);
     public static void loginMenu(){
         System.out.println("Employee Manage version beta 0.5");
     }
@@ -16,17 +17,14 @@ public class PrintOut {
         System.out.println("2.Sua thong tin");
         System.out.println("3.Xoa nha vien");
         System.out.println("4.Loc bang chuc vu");
+        System.out.println("5.Thay doi bang");
         System.out.println("0.Exit");
     }
     public static void coution(){
         System.out.println("Bo trong de thoat");
     }
     public static void employeeTable(){
-        if(arrayList == null) {
-            IOReader ioReader = IOReader.getInstance();
-            ioReader.setPath("data/employee.txt");
-            arrayList = ioReader.readFile(1);
-        }
+
             System.out.println("------------------------------------------------------------");
             System.out.printf("STT  |");
             System.out.printf("\t\tHo va ten       |");
@@ -67,7 +65,9 @@ public class PrintOut {
     public static void setArrayListToNull(){
         arrayList = null;
     }
-
+    public static void setArrayList(ArrayList<Employee> list){
+        arrayList = list;
+    }
     public static void addEmployee(String name, String position, int dayInWork){
         arrayList.add(new Employee(name, position, dayInWork));
     }
@@ -79,5 +79,10 @@ public class PrintOut {
         for (int i = 0; i < 40; i++) {
             System.out.println();
         }
+    }
+    public static void printDirectoryFile(){
+        IOReader ioReader = IOReader.getInstance();
+        ioReader.setPath("data");
+        ioReader.printListFile();
     }
 }

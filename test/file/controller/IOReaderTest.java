@@ -11,4 +11,10 @@ class IOReaderTest {
         ioReader.setPath("data/employee.txt");
         ioReader.readFile(1);
     }
+    @Test
+    void readNewFile(){
+        IOReader ioReader = IOReader.getInstance();
+        ioReader.setPath("data");
+        ioReader.printListFile();
+    }
 }

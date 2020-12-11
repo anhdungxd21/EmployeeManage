@@ -11,6 +11,7 @@ package Controller;
 import employee.Employee;
 import file.controller.IOReader;
 import file.controller.IOWriter;
+import org.omg.IOP.IOR;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -181,7 +182,17 @@ public class Controller {
         }
 
     }
-
+    public static void changeTable(){
+        PrintOut.clearScreen();
+        PrintOut.printDirectoryFile();
+        System.out.println("Nhap duong dan file:");
+        String path = scanner.nextLine();
+        IOReader ioReader = IOReader.getInstance();
+        ioReader.setPath("data/"+path);
+        ArrayList<Employee> employees = ioReader.readFile(true);
+        PrintOut.setArrayList(employees);
+        mainMenu();
+    }
     public static int mainMenu(){
         PrintOut.mainMenu();
         String choice = scanner.nextLine();
@@ -216,6 +227,9 @@ public class Controller {
             case "4":
                 //filterFile
                 filterFile();
+                break;
+            case "5":
+                changeTable();
                 break;
             case "0":
                 System.exit(0);
