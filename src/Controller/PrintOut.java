@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PrintOut {
     private static ArrayList<Employee> arrayList;
     public static void loginMenu(){
-        System.out.println("Employee Manage version 0.1");
+        System.out.println("Employee Manage version beta 0.5");
     }
     public static void mainMenu(){
         employeeTable();

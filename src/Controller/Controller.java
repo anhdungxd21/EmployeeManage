@@ -1,3 +1,11 @@
+/*
+ * Case-study module 2
+ * 11/12/2020
+ * author: Le Anh Dung
+ * class : C0920i1
+ * Employee Management version beta 0.5
+ */
+
 package Controller;
 
 import employee.Employee;
