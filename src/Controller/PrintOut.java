@@ -15,7 +15,11 @@ public class PrintOut {
         System.out.println("1.Them nhan vien");
         System.out.println("2.Sua thong tin");
         System.out.println("3.Xoa nha vien");
+        System.out.println("4.Loc bang chuc vu");
         System.out.println("0.Exit");
+    }
+    public static void coution(){
+        System.out.println("Bo trong de thoat");
     }
     public static void employeeTable(){
         if(arrayList == null) {
@@ -37,6 +41,23 @@ public class PrintOut {
                 System.out.println();
             }
             System.out.println("------------------------------------------------------------");
+
+    }
+    public static void employeeTable(ArrayList<Employee> arrayList){
+        System.out.println("------------------------------------------------------------");
+        System.out.printf("STT  |");
+        System.out.printf("\t\tHo va ten       |");
+        System.out.printf("\tChuc vu       |");
+        System.out.printf("\tNgay cong  |\n");
+        System.out.println("------------------------------------------------------------");
+        for (int i = 0; i < arrayList.size(); i++) {
+            System.out.printf("%-5d|  ", i+1);
+            System.out.printf("%-20s|  ", arrayList.get(i).getName());
+            System.out.printf("%-15s|  ", arrayList.get(i).getPosition());
+            System.out.printf("%-10d|  ", arrayList.get(i).getDayInWork());
+            System.out.println();
+        }
+        System.out.println("------------------------------------------------------------");
 
     }
 

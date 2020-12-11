@@ -42,6 +42,12 @@ public class Controller {
         ioWriter.writeObject();
     }
 
+    public static void saveFile(String path){
+        IOWriter ioWriter = IOWriter.getInstance();
+        ioWriter.setPath("data/"+path);
+        ioWriter.writeObject();
+    }
+
     public static void editMenu(){
         PrintOut.clearScreen();
         PrintOut.employeeTable();
@@ -107,6 +113,34 @@ public class Controller {
         mainMenu();
     }
 
+    public static void filterFile(){
+        PrintOut.clearScreen();
+        PrintOut.employeeTable();
+        PrintOut.coution();
+        System.out.print("Nhap chuc vu can loc:");
+        String input = scanner.nextLine();
+        if(input.length() > 0) {
+
+
+            ArrayList<Employee> employeesSubList = new ArrayList<Employee>();
+            ArrayList<Employee> employees = PrintOut.getArrayList();
+            for (int i = 0; i < employees.size(); i++) {
+                String position = employees.get(i).getPosition().toUpperCase();
+                String compare = input.toUpperCase();
+                if (compare.compareTo(position) == 0) {
+                    employeesSubList.add(employees.get(i));
+                }
+            }
+            PrintOut.clearScreen();
+            PrintOut.employeeTable(employeesSubList);
+        }else{
+            PrintOut.clearScreen();
+            mainMenu();
+        }
+
+
+    }
+
     public static int mainMenu(){
         PrintOut.mainMenu();
         String choice = scanner.nextLine();
@@ -136,6 +170,10 @@ public class Controller {
             case "3":
                 removeMenu();
                 saveFile();
+                break;
+            case "4":
+                //filterFile
+                filterFile();
                 break;
             case "0":
                 System.exit(0);
