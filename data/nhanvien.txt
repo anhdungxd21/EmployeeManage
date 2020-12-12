@@ -5,3 +5,4 @@ Nguyen Trung Nghia,Nhan Vien,12
 Nguyen Xuan Chien,Nhan vien,12
 Nguyen The Anh,Nhan vien,12
 Duong Quoc Anh,Nhan vien,12
+Ngo Bao Ngoc,Nhan vien,12

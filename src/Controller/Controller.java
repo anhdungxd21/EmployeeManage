@@ -22,22 +22,23 @@ public class Controller {
     private static final Pattern pattern = Pattern.compile("[0-9]{1,}");
     private static final Scanner scanner = new Scanner(System.in);
     private static String path;
+
     /*
      * login logical
      */
-    public static boolean login(){
+    public static boolean login() {
         PrintOut.clearScreen();
         PrintOut.loginMenu();
         System.out.print("username: ");
         String username = scanner.nextLine();
         System.out.print("password: ");
         String password = scanner.nextLine();
-        IOReader readFile =  IOReader.getInstance();
+        IOReader readFile = IOReader.getInstance();
         readFile.setPath("person.txt");
         StringBuilder userList = readFile.readFile();
         String[] user = userList.toString().split(",");
-        for (int i = 0; i < user.length-1; i+=2) {
-            if(user[i].equals(username)  && user[i+1].equals(password)){
+        for (int i = 0; i < user.length - 1; i += 2) {
+            if (user[i].equals(username) && user[i + 1].equals(password)) {
                 PrintOut.clearScreen();
                 return true;
             }
@@ -46,18 +47,18 @@ public class Controller {
         return false;
     }
 
-    public static void saveFile(){
+    public static void saveFile() {
         IOWriter ioWriter = IOWriter.getInstance();
         ioWriter.writeObject();
     }
 
-    public static void saveFile(String path,ArrayList<Employee> arrayList){
+    public static void saveFile(String path, ArrayList<Employee> arrayList) {
         IOWriter ioWriter = IOWriter.getInstance();
-        ioWriter.setPath("data/"+path);
+        ioWriter.setPath("data/" + path);
         ioWriter.writeObject(arrayList);
     }
 
-    public static void editMenu(){
+    public static void editMenu() {
         PrintOut.clearScreen();
         PrintOut.employeeTable();
         System.out.print("Chon so thu tu can chinh sua:");
@@ -65,9 +66,9 @@ public class Controller {
         ArrayList<Employee> employees = PrintOut.getArrayList();
         Pattern pattern = Pattern.compile("[0-9]{1,}");
         Matcher matcher;
-        try{
+        try {
             choice = Integer.parseInt(scanner.nextLine());
-            if(choice < 1 || choice > employees.size()){
+            if (choice < 1 || choice > employees.size()) {
                 editMenu();
             }
             System.out.print("Nhap ten moi:");
@@ -75,56 +76,58 @@ public class Controller {
             System.out.print("Nhap chuc vu moi:");
             String position = scanner.nextLine();
             String dayInWork;
-            do{
+            do {
                 System.out.print("Nhap ngay cong moi:");
                 dayInWork = scanner.nextLine();
                 matcher = pattern.matcher(dayInWork);
-            }while(dayInWork.length()>0 && !matcher.matches());
-            if(name.length() > 0){
-                employees.get(choice-1).setName(name);
+            } while (dayInWork.length() > 0 && !matcher.matches());
+            if (name.length() > 0) {
+                employees.get(choice - 1).setName(name);
             }
-            if(position.length()>0){
-                employees.get(choice-1).setPosition(position);
+            if (position.length() > 0) {
+                employees.get(choice - 1).setPosition(position);
             }
-            if(dayInWork.length() > 0){
-                employees.get(choice-1).setDayInWork(Integer.parseInt(dayInWork));
+            if (dayInWork.length() > 0) {
+                employees.get(choice - 1).setDayInWork(Integer.parseInt(dayInWork));
             }
             saveFile();
             PrintOut.clearScreen();
             mainMenu();
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             editMenu();
         }
     }
-    public static void editMenu(ArrayList<Employee> employees,String something){
+
+    public static void editMenu(ArrayList<Employee> employees, String something) {
         System.out.print("Chọn thứ tự nhân viên cần sửa:");
         int choice;
-        try{
+        try {
             choice = Integer.parseInt(scanner.nextLine());
             int index = -1;
-            if(choice < 1 || choice > employees.size()){
+            if (choice < 1 || choice > employees.size()) {
                 editMenu(employees);
             }
             for (int i = 0; i < PrintOut.getArrayList().size(); i++) {
-                if(PrintOut.getArrayList().get(i).getName().contains(employees.get(choice).getName())){
+                if (PrintOut.getArrayList().get(i).getName().contains(employees.get(choice).getName())) {
                     index = i;
                 }
             }
-            if(index > -1){
+            if (index > -1) {
                 PrintOut.getArrayList().remove(index);
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             editMenu(employees);
         }
     }
-    public static void editMenu(ArrayList<Employee> employees){
+
+    public static void editMenu(ArrayList<Employee> employees) {
         System.out.print("Chọn thứ tự nhân viên cần sửa:");
         int choice;
         Pattern pattern = Pattern.compile("[0-9]{1,}");
         Matcher matcher;
-        try{
+        try {
             choice = Integer.parseInt(scanner.nextLine());
-            if(choice < 1 || choice > employees.size()){
+            if (choice < 1 || choice > employees.size()) {
                 editMenu(employees);
             }
             System.out.println("Để trống để bỏ qua.");
@@ -133,56 +136,56 @@ public class Controller {
             System.out.print("Nhập chức vụ mới:");
             String position = scanner.nextLine();
             String dayInWork;
-            do{
+            do {
                 System.out.print("Nhap ngay cong moi:");
                 dayInWork = scanner.nextLine();
                 matcher = pattern.matcher(dayInWork);
-            }while(dayInWork.length()>0 && !matcher.matches());
-            if(name.length() > 0){
-                employees.get(choice-1).setName(name);
+            } while (dayInWork.length() > 0 && !matcher.matches());
+            if (name.length() > 0) {
+                employees.get(choice - 1).setName(name);
             }
-            if(position.length()>0){
-                employees.get(choice-1).setPosition(position);
+            if (position.length() > 0) {
+                employees.get(choice - 1).setPosition(position);
             }
-            if(dayInWork.length() > 0){
-                employees.get(choice-1).setDayInWork(Integer.parseInt(dayInWork));
+            if (dayInWork.length() > 0) {
+                employees.get(choice - 1).setDayInWork(Integer.parseInt(dayInWork));
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             editMenu(employees);
         }
     }
 
-    public static void removeMenu(){
+    public static void removeMenu() {
         PrintOut.clearScreen();
         PrintOut.employeeTable();
         Matcher matcher;
         String choice;
         ArrayList<Employee> employees = PrintOut.getArrayList();
-        do{
+        do {
             System.out.print("Chon so thu tu nhan vien de xoa: ");
             choice = scanner.nextLine();
-            if(choice.length()<1){
+            if (choice.length() < 1) {
                 PrintOut.clearScreen();
                 mainMenu();
             }
             matcher = pattern.matcher(choice);
-        }while (!matcher.matches());
-        try{
+        } while (!matcher.matches());
+        try {
             PrintOut.removeEmployee(Integer.parseInt(choice) - 1);
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             removeMenu();
         }
         PrintOut.clearScreen();
         mainMenu();
     }
 
-    public static void filterFile(){
+    public static void filterFile() {
         PrintOut.clearScreen();
         PrintOut.employeeTable();
         PrintOut.coution();
         System.out.print("Nhap chuc vu can loc:");
         String input = scanner.nextLine();
-        if(input.length() > 0) {
+        if (input.length() > 0) {
 
 
             ArrayList<Employee> employeesSubList = new ArrayList<Employee>();
@@ -197,34 +200,34 @@ public class Controller {
             PrintOut.clearScreen();
             PrintOut.employeeTable(employeesSubList);
             saveSubTable(employeesSubList);
-        }else{
+        } else {
             PrintOut.clearScreen();
             mainMenu();
         }
     }
 
-    public static void saveSubTable(ArrayList<Employee> employees){
+    public static void saveSubTable(ArrayList<Employee> employees) {
         String choice;
         Pattern check1 = Pattern.compile("[01]{1}");
         Pattern checkNameFile = Pattern.compile("([a-zA-Z]{1,}[0-9]{0,})|([a-zA-Z]{1,}[0-9]{0,})[.][a-z0-9]{1,}");
         Matcher matcher;
         Matcher matchNameFile;
-        do{
+        do {
             System.out.println("1.Luu bang moi ra file moi");
             System.out.println("0.Exit");
             choice = scanner.nextLine();
             matcher = check1.matcher(choice);
-        }while (!matcher.matches());
-        switch (choice){
+        } while (!matcher.matches());
+        switch (choice) {
             case "1":
                 String path;
-                do{
+                do {
                     System.out.print("Nhap ten file: ");
                     path = scanner.nextLine();
                     matchNameFile = checkNameFile.matcher(path);
-                }while (!matchNameFile.matches());
-                if(path.length() > 0){
-                    saveFile(path,employees);
+                } while (!matchNameFile.matches());
+                if (path.length() > 0) {
+                    saveFile(path, employees);
                 }
                 PrintOut.clearScreen();
                 mainMenu();
@@ -236,19 +239,20 @@ public class Controller {
         }
 
     }
-    public static void changeTable(){
+
+    public static void changeTable() {
         PrintOut.clearScreen();
         PrintOut.printDirectoryFile();
         System.out.println("Không nhập gì hoặc nhập sai để trở về Trang Chính.");
         System.out.print("Nhập tên thư mục:");
         String path = scanner.nextLine();
         boolean flag = false;
-        for(String stringPath:PrintOut.getFileList()){
-            if(stringPath.toUpperCase().contains(path.toUpperCase())||stringPath.contains(path.toLowerCase())){
+        for (String stringPath : PrintOut.getFileList()) {
+            if (stringPath.toUpperCase().contains(path.toUpperCase()) || stringPath.contains(path.toLowerCase())) {
                 path = stringPath;
             }
         }
-        if(path.length() >0) {
+        if (path.length() > 0) {
             IOReader ioReader = IOReader.getInstance();
             ioReader.setPath("data/" + path);
             IOWriter ioWriter = IOWriter.getInstance();
@@ -257,12 +261,13 @@ public class Controller {
             PrintOut.setArrayList(employees);
             PrintOut.clearScreen();
             mainMenu();
-        }else{
+        } else {
             PrintOut.clearScreen();
             mainMenu();
         }
     }
-    public static void searchEmployeeEditMenu(ArrayList<Employee> newEmployees){
+
+    public static void searchEmployeeEditMenu(ArrayList<Employee> newEmployees) {
         PrintOut.clearScreen();
         PrintOut.employeeTable(newEmployees);
         System.out.println("\n1.Chỉnh sửa thông tin nhân viên.");
@@ -270,7 +275,7 @@ public class Controller {
         System.out.println("0.Trở về trang chính.");
         System.out.print("Lựa chọn: ");
         String choice = scanner.nextLine();
-        switch (choice){
+        switch (choice) {
             case "1":
                 editMenu(newEmployees);
                 PrintOut.clearScreen();
@@ -279,7 +284,7 @@ public class Controller {
                 saveFile();
                 break;
             case "2":
-                editMenu(newEmployees,"somthing");
+                editMenu(newEmployees, "somthing");
                 PrintOut.clearScreen();
                 break;
             case "0":
@@ -289,26 +294,81 @@ public class Controller {
                 searchEmployeeEditMenu(newEmployees);
         }
     }
-    public static void searchEmployee(){
+
+    public static void searchEmployee() {
         PrintOut.clearScreen();
         PrintOut.employeeTable();
         System.out.print("Nhập tên nhân viên:");
         String name = scanner.nextLine();
         ArrayList<Employee> employees = PrintOut.getArrayList();
         ArrayList<Employee> newEmployees = new ArrayList<Employee>();
-        for(Employee employee:employees ){
+        for (Employee employee : employees) {
             String objectName = employee.getName();
-            if(objectName.toUpperCase().contains(name.toUpperCase())){
+            if (objectName.toUpperCase().contains(name.toUpperCase())) {
                 newEmployees.add(employee);
             }
         }
         searchEmployeeEditMenu(newEmployees);
         return;
     }
-    public static int mainMenu(){
+
+    public static void mergeTable(){
+        PrintOut.clearScreen();
+        PrintOut.employeeTable();
+        System.out.println("*ĐƯờng dẫn file*");
+        PrintOut.printDirectoryFile();
+        System.out.println("****************");
+        System.out.println("Không nhập gì hoặc nhập sai để trở về Trang Chính.");
+        System.out.print("Nhập tên thư mục:");
+        String path = scanner.nextLine();
+        boolean flag = false;
+        for (String stringPath : PrintOut.getFileList()) {
+            if (stringPath.toUpperCase().contains(path.toUpperCase()) || stringPath.contains(path.toLowerCase())) {
+                path = stringPath;
+            }
+        }
+        if (path.length() > 0) {
+            IOReader ioReader = IOReader.getInstance();
+            ioReader.setPath("data/" + path);
+            ArrayList<Employee> finalList = new ArrayList<Employee>();
+            ArrayList<Employee> mainList = PrintOut.getArrayList();
+            ArrayList<Employee> subList = ioReader.readFile(true);
+            ArrayList<Integer> index = new ArrayList<Integer>(subList.size());
+            for(Employee employee:mainList){
+                finalList.add(employee);
+            }
+            boolean addObject = false;
+            for(int j = 0; j < subList.size();j++){
+                for (int i = 0; i < mainList.size(); i++) {
+                    if(mainList.get(i).getName().contains(subList.get(j).getName())){
+                        mainList.get(i).setName(subList.get(j).getName());
+                        mainList.get(i).setPosition(subList.get(j).getPosition());
+                        mainList.get(i).setDayInWork(subList.get(j).getDayInWork());
+                        addObject = true;
+                    }
+
+                }
+                if(addObject){
+                    addObject = false;
+                    continue;
+                }
+                finalList.add(subList.get(j));
+            }
+            PrintOut.setArrayList(finalList);
+            PrintOut.clearScreen();
+            mainMenu();
+            saveFile();
+
+        } else {
+            PrintOut.clearScreen();
+            mainMenu();
+        }
+
+    }
+    public static int mainMenu() {
         PrintOut.mainMenu();
         String choice = scanner.nextLine();
-        switch (choice){
+        switch (choice) {
             case "1":
                 Matcher matcher;
                 PrintOut.clearScreen();
@@ -318,13 +378,13 @@ public class Controller {
                 System.out.print("Nhap chuc vu nhan vien: ");
                 String position = scanner.nextLine();
                 String dayInWork;
-                do{
+                do {
                     System.out.print("Nhap ngay cong: ");
                     dayInWork = scanner.nextLine();
                     matcher = pattern.matcher(dayInWork);
-                }while (!matcher.matches());
+                } while (!matcher.matches());
 
-                PrintOut.addEmployee(name,position,Integer.parseInt(dayInWork));
+                PrintOut.addEmployee(name, position, Integer.parseInt(dayInWork));
                 saveFile();
                 PrintOut.clearScreen();
                 mainMenu();
@@ -346,6 +406,9 @@ public class Controller {
             case "6":
                 searchEmployee();
                 mainMenu();
+                break;
+            case "7":
+                mergeTable();
                 break;
             case "0":
                 System.exit(0);

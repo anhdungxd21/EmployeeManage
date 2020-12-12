@@ -20,6 +20,7 @@ public class PrintOut {
         System.out.println("4.Lọc nhân viên bằng chức vụ.");
         System.out.println("5.Thay đổi bảng làm việc.");
         System.out.println("6.Tìm Kiếm Nhân Viên.");
+        System.out.println("7.Hợp bảng theo file.");
         System.out.println("0.Thoát trương trình.");
     }
     public static String[] getFileList(){
