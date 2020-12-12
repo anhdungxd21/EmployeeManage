@@ -99,24 +99,25 @@ public class Controller {
     }
 
     public static void editMenu(ArrayList<Employee> employees, String something) {
-        System.out.print("Chọn thứ tự nhân viên cần sửa:");
+        System.out.print("Chọn thứ tự nhân viên cần xóa:");
         int choice;
         try {
             choice = Integer.parseInt(scanner.nextLine());
             int index = -1;
             if (choice < 1 || choice > employees.size()) {
-                editMenu(employees);
+                editMenu(employees,something);
             }
             for (int i = 0; i < PrintOut.getArrayList().size(); i++) {
-                if (PrintOut.getArrayList().get(i).getName().contains(employees.get(choice).getName())) {
+                if (PrintOut.getArrayList().get(i).getName().equalsIgnoreCase(employees.get(choice-1).getName())) {
                     index = i;
                 }
             }
             if (index > -1) {
                 PrintOut.getArrayList().remove(index);
+                return;
             }
         } catch (NumberFormatException e) {
-            editMenu(employees);
+            editMenu(employees,something);
         }
     }
 
@@ -161,8 +162,9 @@ public class Controller {
         Matcher matcher;
         String choice;
         ArrayList<Employee> employees = PrintOut.getArrayList();
+        System.out.println("BỎ trống để thoát.");
         do {
-            System.out.print("Chon so thu tu nhan vien de xoa: ");
+            System.out.print("Chọn số thứ tự nhân viên để xóa: ");
             choice = scanner.nextLine();
             if (choice.length() < 1) {
                 PrintOut.clearScreen();
@@ -409,6 +411,7 @@ public class Controller {
                 break;
             case "7":
                 mergeTable();
+                saveFile();
                 break;
             case "0":
                 System.exit(0);
